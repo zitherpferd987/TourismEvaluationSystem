@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TourismEvaluationSystem.Models.ViewPots>
+
+@{
+    ViewBag.Title = "景点评价系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("a:contains('删除')").click(function () {
+            return confirm("是否删除该记录？");
+        });
+    });
+</script>
+
+<ul class="nav nav-tabs">
+    <li class="active">@Html.ActionLink("景点管理", "Index")</li>
+    <li>@Html.ActionLink("评价统计", "EvaluationStatistics")</li>
+    <li>@Html.ActionLink("管理员密码修改", "AdminPasswordEdit")</li>
+    <li>@Html.ActionLink("登出", "AdminLogout")</li>
+</ul>
+
+<h2>景点一览</h2>
+
+<p>
+    @Html.ActionLink("添加一个新景点", "CreateViewPot")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            景点Id
+        </th>
+        <th>
+            景点名称
+        </th>
+        <th>
+            景点图片
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotName)
+        </td>
+        <td>
+            <img src="~/Content/Images/@item.ViewPotImg" height="50" width="50" />
+        </td>
+        <td>
+            @Html.ActionLink("编辑", "EditViewPot", new { vpid=item.ViewPotId }) |
+            @Html.ActionLink("评价详情", "ShowReviewDetails", new { vpid=item.ViewPotId }) |
+            @Html.ActionLink("删除", "DeleteViewPot", new { vpid=item.ViewPotId })
+        </td>
+    </tr>
+}
+
+</table>

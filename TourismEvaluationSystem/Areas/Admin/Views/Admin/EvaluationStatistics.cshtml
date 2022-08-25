@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TourismEvaluationSystem.Models.EvaluationStatisticsViewModel>
+
+@{
+    ViewBag.Title = "景点评价系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="nav nav-tabs">
+    <li>@Html.ActionLink("景点管理", "Index")</li>
+    <li class="active">@Html.ActionLink("评价统计", "EvaluationStatistics")</li>
+    <li>@Html.ActionLink("管理员密码修改", "AdminPasswordEdit")</li>
+    <li>@Html.ActionLink("登出", "AdminLogout")</li>
+</ul>
+
+<h2>景点评价统计</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewPotId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewPotName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageViewScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageServiceScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageWorthScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AverageTotalScore)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageViewScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageServiceScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageWorthScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AverageTotalScore)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TourismEvaluationSystem.Models.ReviewDetailViewModel>
+
+@{
+    ViewBag.Title = "景点评价系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("a:contains('删除')").click(function () {
+            return confirm("是否删除该记录？");
+        });
+    });
+</script>
+
+<h2>景点评价详情 —— @ViewData["ViewPotName"]</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewPotReviewId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TouristAccountName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorthScore)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewPotReviewId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TouristAccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorthScore)
+            </td>
+            <td>
+                @Html.ActionLink("删除", "DeleteTouristReview", new { vprId = item.ViewPotReviewId, vpId = ViewData["vpId"].ToString() })
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @{
+        int pc = int.Parse(ViewData["pageCount"].ToString());
+        for (int i = 1; i <= pc; i++)
+        {
+
+            @Html.ActionLink("第" + i + "页", "ShowReviewDetails", "Admin", new { pis = i, vpId = ViewData["vpId"] }, new { });
+            <span>&nbsp;&nbsp;</span>
+        }
+    }
+</div>
+<hr />
+<p>@Html.ActionLink("返回", "Index")</p>

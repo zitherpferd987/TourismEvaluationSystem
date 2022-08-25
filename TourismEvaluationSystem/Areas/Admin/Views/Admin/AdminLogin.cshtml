@@ -1,0 +1,31 @@
+﻿@model TourismEvaluationSystem.Models.AdminLoginViewModel
+
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>管理员登录</h2>
+<div>
+    <p>
+        @Html.ValidationMessage("Message")
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        @*@Html.AntiForgeryToken()*@
+        <p>@Html.LabelFor(m => m.AdminAccount)@Html.EditorFor(m => m.AdminAccount)@Html.ValidationMessageFor(m => m.AdminAccount)</p>
+        <p>@Html.LabelFor(m => m.AdminPassword)@Html.EditorFor(m => m.AdminPassword)@Html.ValidationMessageFor(m => m.AdminPassword)</p>
+        <p>
+            @Html.LabelFor(m => m.VerificationCode)
+            @Html.EditorFor(m => m.VerificationCode) <img id="verificationcode" title="点击刷新" src="@Url.Action("VerificationCode")" style="cursor:pointer" /> @Html.ValidationMessageFor(m => m.VerificationCode)
+        </p>
+        <p><input type="submit" id="LoginButton" value="登录" /></p>
+    }
+</div>
+<script type="text/javascript">
+    $("#verificationcode ").click(function () {
+        $("#verificationcode ").attr("src", "@Url.Action("VerificationCode")?" + new Date());
+    })
+</script>

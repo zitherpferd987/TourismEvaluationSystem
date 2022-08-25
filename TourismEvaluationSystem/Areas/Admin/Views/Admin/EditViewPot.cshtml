@@ -1,0 +1,55 @@
+﻿@model TourismEvaluationSystem.Models.EditViewPotViewModel
+
+@{
+    ViewBag.Title = "景点评价系统";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<SCRIPT language=javascript>
+    function preview() {
+        frm = document.editForm;
+        if (frm.tu.value == "") {
+            alert("请选择图片");
+            frm.tu.focus();
+            return false;
+        }
+
+        var preview = frm.pvimg;
+        var file = frm.tu.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+
+        preview.style.display = "block";
+    }
+</SCRIPT>
+<h2>修改景点</h2>
+<p>
+    @Html.ValidationMessage("Message")
+</p>
+<div>
+    @using (Html.BeginForm("EditViewPot", "Admin", FormMethod.Post, new { id = "editForm", name = "editForm", enctype = "multipart/form-data" }))
+    {
+        @*@Html.AntiForgeryToken()*@
+        <p>@Html.LabelFor(m => m.ViewPotId)@Html.TextBoxFor(m => m.ViewPotId, new { @readonly = true })</p>
+        <p>@Html.LabelFor(m => m.ViewPotName)@Html.EditorFor(m => m.ViewPotName)@Html.ValidationMessageFor(m => m.ViewPotName)</p>
+        <p>@Html.LabelFor(m => m.ViewPotImgFile)</p>
+        <div>
+            <img name="pvimg" src="" width=500 alt="图片预览..." align='middle' style="display:none;" />
+        </div>
+        <INPUT onclick="preview()" type="button" value="图片预览" name="button">
+        <p>@Html.TextBoxFor(m => m.ViewPotImgFile, new { id = "tu", type = "file", name = "Files" })@Html.ValidationMessageFor(m => m.ViewPotImgFile)</p>
+        <p>@Html.TextBoxFor(m => m.ViewPotImg, new { type = "hidden" })</p>
+        <p><input type="submit" value="修改" /></p>
+    }
+</div>
