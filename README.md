@@ -29,5 +29,7 @@ Make sure you can create successful, then get in `TourismEvaluationEntity.cs` in
             //Database.SetInitializer<TourismEvaluationEntity>(null);
  ```
 If you create the database in first time, you should choose the first code to generate the database, or if you have it but modified, then you can choose the second or the third code.  
-Then build it and start, go to `./admin/Admin/Initialize` and wait to pop the content "OK", then all the initialization is finished. and then you can join my MVC peoject.
+Then build it and start, go to `./admin/Admin/Initialize` and wait to pop the content "OK", then all the initialization is finished. and then you can enjoy my MVC peoject.
 
+##### CSDN link
+[CSDN](https://blog.csdn.net/weixin_42103865?spm=1010.2135.3001.5343)
