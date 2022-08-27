@@ -13,7 +13,8 @@ namespace TourismEvaluationSystem.Models
         public string TouristAccountName { get; set; }
         public string TouristUserName { get; set; }
         public string TouristPassword { get; set; }
-        public int TouristPhoneNumber { get; set; }
+        public string TouristPhoneNumber { get; set; }
+        public string TouristAvatar { get; set; }
         public string TouristAddress { get; set; }
         public virtual List<ViewPotReviews> ViewPotReviews { get; set; }
     }

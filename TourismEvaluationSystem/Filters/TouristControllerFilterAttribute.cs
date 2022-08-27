@@ -7,16 +7,16 @@ using TourismEvaluationSystem.Models;
 
 namespace TourismEvaluationSystem.Filters
 {
-    public class TouristControllerFilterAttribute : ActionFilterAttribute
+    public class AdministratorControllerFilterAttribute : ActionFilterAttribute
     {
         public string Name { get; set; }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            Tourists tourist = HttpContext.Current.Session["Tourist"] as Tourists;
-            if (tourist == null)
+            Administrator admin = HttpContext.Current.Session["Admin"] as Administrator;
+            if (admin == null)
             {
-                HttpContext.Current.Response.Redirect("/Tourist/Tourist/TouristLogin");
+                HttpContext.Current.Response.Redirect("/Admin/Admin/AdminLogin");
             }
         }
     }

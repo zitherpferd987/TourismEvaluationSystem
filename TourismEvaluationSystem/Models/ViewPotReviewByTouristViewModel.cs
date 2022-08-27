@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace TourismEvaluationSystem.Models
 {
-    public class EditViewPotViewModel
+    public class ViewPotReviewByTouristViewModel
     {
         [Display(Name = "景点Id")]
         public int ViewPotId { get; set; }
@@ -16,13 +16,13 @@ namespace TourismEvaluationSystem.Models
         public string ViewPotName { get; set; }
         [Display(Name = "景点描述")]
         public string ViewPotDescription { get; set; }
-        public string ViewPotImg { get; set; }//不作显示，仅供数据传递
+        public string ViewPotImg { get; set; }
 
-        [Required(ErrorMessage = "请选择要上传的图片")]
-        [Display(Name = "景点图片")]
-        [DataType(DataType.Upload)]
-        public HttpPostedFileBase ViewPotImgFile { get; set; }  //注意上传文件类型为HttpPostedFileBase
-
-
+        [Display(Name = "景色得分")]
+        public int ViewScore { get; set; }
+        [Display(Name = "服务得分")]
+        public int ServiceScore { get; set; }
+        [Display(Name = "性价比得分")]
+        public int WorthScore { get; set; }
     }
 }

@@ -1,0 +1,141 @@
+﻿@model TourismEvaluationSystem.Models.TouristEditViewModel
+
+@{
+    ViewBag.Title = "TouristAccountEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        document.getElementById("TouristAccountName").readOnly = true;  /*对html.editfor设置为只读*/
+
+        $("#Edit").click(function () {
+            return confirm("确认是否提交修改?（修改完成后返回登陆界面并重新登陆）");
+        })
+    });
+    function preview() {
+        frm = document.editForm;
+        if (frm.pic.value == "") {
+            alert("请选择图片");
+            frm.pic.focus();
+            return false;
+        }
+
+        var preview = frm.pvimg;
+        var file = frm.pic.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+
+        preview.style.display = "block";
+    }
+</script>
+<ul class="nav nav-tabs">
+    <li>@Html.ActionLink("景点评价页面", "Index")</li>
+    <li>@Html.ActionLink("历史评价统计", "HistoryEvaluationStatistics")</li>
+    <li class="active">@Html.ActionLink("游客账户修改", "TouristAccountEdit")</li>
+    <li>@Html.ActionLink("登出", "TouristLogout")</li>
+</ul>
+<h2>游客账户修改</h2>
+<img src="~/Content/Images/setting.png" width="30" />
+@using (Html.BeginForm("TouristAccountEdit", "Tourist", FormMethod.Post, new { id = "editForm", name = "editForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <p></p>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristAccountName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristAccountName, new { htmlAttributes = new { @class = "form-control" }, @readonly = true })
+                @Html.ValidationMessageFor(model => model.TouristAccountName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristUserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristUserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TouristUserName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TouristPassword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristPasswordConfirm, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristPasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TouristPasswordConfirm, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TouristPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TouristAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TouristAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TouristAvatarFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p>@Html.TextBoxFor(m => m.TouristAvatarFile, new { id = "pic", type = "file", name = "Files" })@Html.ValidationMessageFor(m => m.TouristAvatarFile)</p>
+                <p>@Html.TextBoxFor(m => m.TouristAvatar, new { type = "hidden" })</p>
+                <img name="pvimg" src="" width=200 alt="图片预览..." align='middle' style="display:none; border-radius:50%" />
+                
+                <INPUT onclick="preview()" type="button" value="图片预览" name="button" class="btn btn-default">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VerificationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VerificationCode, new { htmlAttributes = new { @class = "form-control" } })
+                <img id="verificationcode" title="点击刷新" src="@Url.Action("VerificationCode")" style="cursor:pointer" />
+                @Html.ValidationMessageFor(model => model.VerificationCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="修改" id="Edit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script type="text/javascript">
+    $("#verificationcode ").click(function () {
+        $("#verificationcode ").attr("src", "@Url.Action("VerificationCode")?" + new Date());
+    })
+</script>

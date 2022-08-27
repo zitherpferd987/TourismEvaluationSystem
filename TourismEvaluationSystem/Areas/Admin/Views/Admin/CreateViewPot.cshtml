@@ -47,7 +47,8 @@
     {
         @*@Html.AntiForgeryToken()*@
         <p>@Html.LabelFor(m => m.ViewPotName)@Html.EditorFor(m => m.ViewPotName)@Html.ValidationMessageFor(m => m.ViewPotName)</p>
-        <p>@Html.LabelFor(m => m.ViewPotImgFile)@Html.TextBoxFor(m => m.ViewPotImgFile, new {id = "tu", type = "file", name = "Files" })@Html.ValidationMessageFor(m => m.ViewPotImgFile)</p>
+        <p>@Html.LabelFor(m => m.ViewPotDescription)@Html.TextAreaFor(m => m.ViewPotDescription)@Html.ValidationMessageFor(m => m.ViewPotDescription)</p>
+        <p>@Html.LabelFor(m => m.ViewPotImgFile)@Html.TextBoxFor(m => m.ViewPotImgFile, new { id = "tu", type = "file", name = "Files" })@Html.ValidationMessageFor(m => m.ViewPotImgFile)</p>
         <div>
             <img name="pvimg" src="" width=500 alt="图片预览..." align='middle' style="display:none;" />
         </div>

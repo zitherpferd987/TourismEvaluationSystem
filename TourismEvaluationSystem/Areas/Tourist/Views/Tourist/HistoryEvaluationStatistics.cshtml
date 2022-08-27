@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TourismEvaluationSystem.Models.HistoryTouristReviewViewModel>
+
+@{
+    ViewBag.Title = "HistoryEvaluationStatistics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul class="nav nav-tabs">
+    <li>@Html.ActionLink("景点评价页面", "Index")</li>
+    <li class="active">@Html.ActionLink("历史评价统计", "HistoryEvaluationStatistics")</li>
+    <li>@Html.ActionLink("游客账户修改", "TouristAccountEdit")</li>
+    <li>@Html.ActionLink("登出", "TouristLogout")</li>
+</ul>
+<h2>历史用户评价</h2>
+<img src="~/Content/Images/comments.png" width="30" />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewPotId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewPotName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Suggestion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ViewScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorthScore)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewPotName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Suggestion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ViewScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorthScore)
+        </td>
+    </tr>
+}
+
+</table>

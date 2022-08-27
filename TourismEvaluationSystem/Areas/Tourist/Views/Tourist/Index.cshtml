@@ -1,0 +1,77 @@
+﻿@model IEnumerable<TourismEvaluationSystem.Models.ViewPots>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="nav nav-tabs">
+    <li class="active">@Html.ActionLink("景点评价页面", "Index")</li>
+    <li>@Html.ActionLink("历史评价统计", "HistoryEvaluationStatistics")</li>
+    <li>@Html.ActionLink("游客账户修改", "TouristAccountEdit")</li>
+    <li>@Html.ActionLink("登出", "TouristLogout")</li>
+</ul>
+<h2>游客评价页面</h2>
+<img src="~/Content/Images/journey.png" width="30" />
+<table style="background-color:#d2d2d2; margin-left:auto">
+    <tr>
+        <td rowspan="2">
+            <img src="~/Content/Images/@ViewData["Avatar"]" height="100" width="100" style="border: solid 5px lightblue; border-radius: 50%; position: relative; left: auto;" />
+        </td>
+        <td style="font-size:24px; top:auto">
+            你好，@ViewData["Tourist"]
+        </td>
+        <td>&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            属地：@ViewData["Address"]
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            景点名称
+        </th>
+        <th>
+            景点图片
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ViewPotName)
+            </td>
+            <td>
+                <img src="~/Content/Images/@item.ViewPotImg" height="50" width="50" style="border-radius:15%" />
+            </td>
+            <td>
+                @Html.ActionLink("评价", "ViewPotReviewByTourist", new { vpId = item.ViewPotId }, new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-md-4">
+            <h2>@Html.DisplayFor(modelItem => item.ViewPotName)</h2>
+            <p>
+                <img src="~/Content/Images/@item.ViewPotImg" height="200" width="200" style="border-radius:15%" />
+            </p>
+            <hr />
+            <p>@Html.DisplayFor(modelItem => item.ViewPotDescription)</p>
+            <p>@Html.ActionLink("评价", "ViewPotReviewByTourist", new { vpId = item.ViewPotId }, new { @class = "btn btn-default" })</p>
+        </div>
+    }
+</div>

@@ -39,7 +39,7 @@ namespace TourismEvaluationSystem.Services
             return flag;
         }
 
-        internal Administrator GetAdminByAccountName(string adminAccount)
+        public Administrator GetAdminByAccountName(string adminAccount)
         {
             Administrator administrator;
             using (TourismEvaluationEntity db = new TourismEvaluationEntity())

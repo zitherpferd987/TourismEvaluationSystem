@@ -129,13 +129,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Tourist\Controllers\TouristController.cs" />
+    <Compile Include="Areas\Tourist\TouristAreaRegistration.cs" />
+    <Compile Include="Common\FunctionTools.cs" />
     <Compile Include="Common\Security.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\TouristControllerFilterAttribute.cs" />
     <Compile Include="Filters\AdministratorControllerFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\HistoryTouristReviewViewModel.cs" />
+    <Compile Include="Models\TouristEditViewModel.cs" />
+    <Compile Include="Models\ViewPotReviewByTouristViewModel.cs" />
+    <Compile Include="Models\TouristLoginViewModel.cs" />
     <Compile Include="Models\AdminPasswordEditViewModel.cs" />
     <Compile Include="Models\AdminLoginViewModel.cs" />
     <Compile Include="Models\EditViewPotViewModel.cs" />
@@ -148,6 +156,7 @@
     <Compile Include="Models\CreateViewPotViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminService.cs" />
+    <Compile Include="Services\TouristService.cs" />
     <Compile Include="Services\ViewPotService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +181,12 @@
     <Content Include="Areas\Admin\Views\Admin\EvaluationStatistics.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\AdminLogin.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\AdminPasswordEdit.cshtml" />
+    <Content Include="Areas\Tourist\Views\web.config" />
+    <Content Include="Areas\Tourist\Views\Tourist\TouristLogin.cshtml" />
+    <Content Include="Areas\Tourist\Views\Tourist\Index.cshtml" />
+    <Content Include="Areas\Tourist\Views\Tourist\ViewPotReviewByTourist.cshtml" />
+    <Content Include="Areas\Tourist\Views\Tourist\HistoryEvaluationStatistics.cshtml" />
+    <Content Include="Areas\Tourist\Views\Tourist\TouristAccountEdit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -202,7 +217,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Views\Admin\" />
+    <Folder Include="Areas\Tourist\Data\" />
+    <Folder Include="Areas\Tourist\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

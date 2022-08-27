@@ -12,6 +12,7 @@ namespace TourismEvaluationSystem.Models
         public int ViewPotId { get; set; }
         public string ViewPotName { get; set; }
         public string ViewPotImg { get; set; }
+        public string ViewPotDescription { get; set; }
 
         public virtual List<ViewPotReviews> ViewPotReviews { get; set; }
     }

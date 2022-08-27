@@ -1,0 +1,84 @@
+﻿@model TourismEvaluationSystem.Models.ViewPots
+@using TourismEvaluationSystem.Models
+
+@{
+    ViewBag.Title = "ViewPotReviewByTourist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>评价页面</h2>
+
+<script>
+    $(document).ready(function () {
+        $("#createbuttom").click(function () {
+            var vps = $('input:radio[name="vs"]:checked').val();
+            var ss = $('input:radio[name="ss"]:checked').val();
+            var ws = $('input:radio[name="ws"]:checked').val();
+            if (vps == null) {
+                alert("请给景点分打分！!");
+                return false;
+            }
+            if (ss == null) {
+                alert("请给服务分打分！!");
+                return false;
+            }
+            if (ws == null) {
+                alert("请给性价比打分！!");
+                return false;
+            }
+            return confirm("确认是否提交？");
+        });
+    });
+</script>
+
+<h2>客户评价</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" action="/Tourist/Tourist/ViewPotReviewByTouristSave">
+                <table width="480" height="300" align="center">
+                    <tr>
+                        <td colspan="2" align="center" style="font-size:20px">@Model.ViewPotName</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><img src="~/Content/Images/@Model.ViewPotImg" height="200" width="200" style="border-radius:10%" /></td>
+                        <td align="center">
+                            景点分<br />
+                            <input type="radio" name="vs" value="5" />优
+                            <input type="radio" name="vs" value="4" />良
+                            <input type="radio" name="vs" value="3" />中
+                            <input type="radio" name="vs" value="1" />差
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            服务分<br />
+                            <input type="radio" name="ss" value="5" />优
+                            <input type="radio" name="ss" value="4" />良
+                            <input type="radio" name="ss" value="3" />中
+                            <input type="radio" name="ss" value="1" />差
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            性价比<br />
+                            <input type="radio" name="ws" value="5" />优
+                            <input type="radio" name="ws" value="4" />良
+                            <input type="radio" name="ws" value="3" />中
+                            <input type="radio" name="ws" value="1" />差
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">您的建议：</td>
+                        <td><textarea name="yourAdvice" rows="8" , cols="40"></textarea></td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2" align="center">
+                            <input type="hidden" name="vpId" value="@Model.ViewPotId" />
+                            <input type="submit" id="createbuttom" value="提交" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>

@@ -6,21 +6,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TourismEvaluationSystem.Models
 {
-    public class ReviewDetailViewModel
+    public class HistoryTouristReviewViewModel
     {
-        [Display(Name = "投票Id")]
-        public int ViewPotReviewId { get; set; }
-        [Display(Name = "投票顾客昵称")]
-        public string TouristAccountName { get; set; }
-        [Display(Name = "投票时间")]
-        public DateTime ReviewDateTime { get; set; }
+        [Display(Name = "景点Id")]
+        public int ViewPotId { get; set; }
+
+        [Required(ErrorMessage = "必填")]
+        [Display(Name = "景点名称")]
+        public string ViewPotName { get; set; }
+        [Display(Name = "游客描述")]
+        public string Suggestion { get; set; }
+
         [Display(Name = "景色得分")]
         public int ViewScore { get; set; }
         [Display(Name = "服务得分")]
         public int ServiceScore { get; set; }
         [Display(Name = "性价比得分")]
         public int WorthScore { get; set; }
-        [Display(Name = "游客评价")]
-        public string Suggestion { get; set; }
     }
 }

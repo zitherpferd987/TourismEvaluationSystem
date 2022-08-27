@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.ViewPotName)
         </td>
         <td>
-            <img src="~/Content/Images/@item.ViewPotImg" height="50" width="50" />
+            <img src="~/Content/Images/@item.ViewPotImg" height="50" width="50" style="border-radius:20%" />
         </td>
         <td>
             @Html.ActionLink("编辑", "EditViewPot", new { vpid=item.ViewPotId }) |

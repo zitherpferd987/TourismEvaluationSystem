@@ -212,6 +212,7 @@ namespace TourismEvaluationSystem.Areas.Admin.Controllers
             editViewPotViewModel.ViewPotId = vpid;
             editViewPotViewModel.ViewPotName = viewPot.ViewPotName;
             editViewPotViewModel.ViewPotImg = viewPot.ViewPotImg;
+            editViewPotViewModel.ViewPotDescription = viewPot.ViewPotDescription;
 
 
             return View(editViewPotViewModel);
@@ -306,17 +307,17 @@ namespace TourismEvaluationSystem.Areas.Admin.Controllers
                 db.Database.ExecuteSqlCommand("Delete From Tourists");
                 db.Database.ExecuteSqlCommand("Delete From Administrators");
 
-                Tourists tourist1 = new Tourists { TouristAccountName = "zhangsan", TouristUserName = "张三", TouristPassword = "zhangsan123" };
-                Tourists tourist2 = new Tourists { TouristAccountName = "lisi123", TouristUserName = "李四", TouristPassword = "lisi123" };
-                Tourists tourist3 = new Tourists { TouristAccountName = "wangwu", TouristUserName = "王五", TouristPassword = "wangwu123" };
+                Tourists tourist1 = new Tourists { TouristAccountName = "zhangsan", TouristUserName = "张三", TouristPassword = Security.ApplyHash("zhangsan123"), TouristAddress = "上海", TouristPhoneNumber = "11451419198" };
+                Tourists tourist2 = new Tourists { TouristAccountName = "lisi123", TouristUserName = "李四", TouristPassword = Security.ApplyHash("lisi123") };
+                Tourists tourist3 = new Tourists { TouristAccountName = "wangwu", TouristUserName = "王五", TouristPassword = Security.ApplyHash("wangwu123") };
                 db.Tourists.Add(tourist1);
                 db.Tourists.Add(tourist2);
                 db.Tourists.Add(tourist3);
                 db.SaveChanges();
 
-                ViewPots viewPot1 = new ViewPots { ViewPotName = "黄山", ViewPotImg = "HuangShan.jpg" };
-                ViewPots viewPot2 = new ViewPots { ViewPotName = "秦皇陵", ViewPotImg = "QinHuangLin.jpg" };
-                ViewPots viewPot3 = new ViewPots { ViewPotName = "宁海", ViewPotImg = "NingHai.jpg" };
+                ViewPots viewPot1 = new ViewPots { ViewPotName = "黄山", ViewPotImg = "HuangShan.jpg", ViewPotDescription = "黃山位於中國安徽省南部黃山市境內，南北長約40公里，東西寬約30公里，山脈面積1200平方公里，核心景區面積約160.6平方公里，主體以花崗岩構成，最高處蓮花峰，海拔1864米。" };
+                ViewPots viewPot2 = new ViewPots { ViewPotName = "秦皇陵", ViewPotImg = "QinHuangLin.jpg", ViewPotDescription = "秦始皇帝陵是秦朝始皇帝的陵墓，位於中國陝西省西安市市中心以東31公里臨潼區驪山，原名驪山園。現存陵冢高76米，陵冢位於內城西南，坐西面東，放置棺槨和陪葬器物的地方為秦始皇陵建築群的核心，目前尚未發掘。" };
+                ViewPots viewPot3 = new ViewPots { ViewPotName = "靜安寺", ViewPotImg = "NingHai.jpg", ViewPotDescription = "靜安寺是一座佛教寺廟，位於中國上海市靜安區南京西路1686號，其歷史可以追溯到公元3世紀的三國時期，是中國江南地區歷史悠久、頗具影響的名剎之一。上海四大佛寺之一。" };
                 db.ViewPots.Add(viewPot1);
                 db.ViewPots.Add(viewPot2);
                 db.ViewPots.Add(viewPot3);

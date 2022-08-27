@@ -11,6 +11,8 @@ namespace TourismEvaluationSystem.Models
         [Required(ErrorMessage = "必填")]
         [Display(Name = "景点名称")]
         public string ViewPotName { get; set; }
+        [Display(Name = "景点描述")]
+        public string ViewPotDescription { get; set; }
         public string ViewPotImg { get; set; }//不作显示，仅供数据传递
 
         [Required(ErrorMessage = "请选择要上传的图片")]

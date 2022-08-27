@@ -27,6 +27,7 @@ namespace TourismEvaluationSystem.Services
                 ViewPots viewPots = new ViewPots();
                 viewPots.ViewPotImg = createViewPotViewModel.ViewPotImg;
                 viewPots.ViewPotName = createViewPotViewModel.ViewPotName;
+                viewPots.ViewPotDescription = createViewPotViewModel.ViewPotDescription;
                 db.ViewPots.Add(viewPots);
                 flag = db.SaveChanges();
             }
@@ -52,6 +53,7 @@ namespace TourismEvaluationSystem.Services
                 editViewPots = db.ViewPots.Find(editViewPotViewModel.ViewPotId);
                 editViewPots.ViewPotName = editViewPotViewModel.ViewPotName;
                 editViewPots.ViewPotImg = editViewPotViewModel.ViewPotImg;
+                editViewPots.ViewPotDescription = editViewPotViewModel.ViewPotDescription;
                 flag = db.SaveChanges();
 
             }
@@ -116,6 +118,7 @@ namespace TourismEvaluationSystem.Services
                                   ViewScore = vpr.ViewScore,
                                   ServiceScore = vpr.ServiceScore,
                                   WorthScore = vpr.WorthScore,
+                                  Suggestion = vpr.Suggestion
                               };
                 //降序排列取出指定页记录
                 reviewDetailViewModels = results.OrderByDescending(r => r.ViewPotReviewId).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
@@ -199,6 +202,7 @@ namespace TourismEvaluationSystem.Services
             }
             return evaluationStatisticsViewModels;
         }
+
     }
 
 }
