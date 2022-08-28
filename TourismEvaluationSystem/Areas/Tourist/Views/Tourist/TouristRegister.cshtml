@@ -1,0 +1,134 @@
+﻿@model TourismEvaluationSystem.Models.TouristRegisterViewModel
+
+@{
+    ViewBag.Title = "TouristRegister";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Create").click(function () {
+            return confirm("确认是否注册新账号？");
+        })
+    });
+    function preview() {
+        frm = document.createForm;
+        if (frm.pic.value == "") {
+            alert("请选择图片");
+            frm.pic.focus();
+            return false;
+        }
+
+        var preview = frm.pvimg;
+        var file = frm.pic.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+
+        preview.style.display = "block";
+    }
+</script>
+<h2>游客注册</h2>
+
+@using (Html.BeginForm("TouristRegister", "Tourist", FormMethod.Post, new { id = "createForm", name = "createForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <h4>TouristRegisterViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristAccountName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristAccountName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristAccountName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristUserName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristUserName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristUserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristPassword, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristPasswordConfirm, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristPasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristPasswordConfirm, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristPhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TouristAddress, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TouristAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TouristAvatarFile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <p>@Html.TextBoxFor(m => m.TouristAvatarFile, new { id = "pic", type = "file", name = "Files" })@Html.ValidationMessageFor(m => m.TouristAvatarFile)</p>
+            <p>@Html.TextBoxFor(m => m.TouristAvatar, new { type = "hidden" })</p>
+            <img name="pvimg" src="" width=200 alt="图片预览..." align='middle' style="display:none; border-radius:50%" />
+            <INPUT onclick="preview()" type="button" value="图片预览" name="button" class="btn btn-default">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.VerificationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.VerificationCode, new { htmlAttributes = new { @class = "form-control" } })
+            <p>
+                <img id="verificationcode" title="点击刷新" src="@Url.Action("VerificationCode")" style="cursor:pointer" />
+                @Html.ValidationMessageFor(model => model.VerificationCode, "", new { @class = "text-danger" })
+            </p>
+        </div>
+    </div>
+
+</div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="Create" value="创建账户" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("返回", "Index")
+</div>
+
+<script type="text/javascript">
+    $("#verificationcode ").click(function () {
+        $("#verificationcode ").attr("src", "@Url.Action("VerificationCode")?" + new Date());
+    })
+</script>

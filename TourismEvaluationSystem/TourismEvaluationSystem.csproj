@@ -142,6 +142,7 @@
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\HistoryTouristReviewViewModel.cs" />
     <Compile Include="Models\TouristEditViewModel.cs" />
+    <Compile Include="Models\TouristRegisterViewModel.cs" />
     <Compile Include="Models\ViewPotReviewByTouristViewModel.cs" />
     <Compile Include="Models\TouristLoginViewModel.cs" />
     <Compile Include="Models\AdminPasswordEditViewModel.cs" />
@@ -187,6 +188,7 @@
     <Content Include="Areas\Tourist\Views\Tourist\ViewPotReviewByTourist.cshtml" />
     <Content Include="Areas\Tourist\Views\Tourist\HistoryEvaluationStatistics.cshtml" />
     <Content Include="Areas\Tourist\Views\Tourist\TouristAccountEdit.cshtml" />
+    <Content Include="Areas\Tourist\Views\Tourist\TouristRegister.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

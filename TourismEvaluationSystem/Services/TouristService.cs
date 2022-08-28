@@ -95,5 +95,24 @@ namespace TourismEvaluationSystem.Services
             }
             return flag;
         }
+
+        public int SaveTouristByTouristRegisterViewModel(TouristRegisterViewModel touristRegisterViewModel)
+        {
+            int flag = 0;
+            using (TourismEvaluationEntity db = new TourismEvaluationEntity())
+            {
+                Tourists tourist = new Tourists();
+                tourist.TouristAccountName = touristRegisterViewModel.TouristAccountName;
+                tourist.TouristUserName= touristRegisterViewModel.TouristUserName;
+                tourist.TouristPassword = Security.ApplyHash(touristRegisterViewModel.TouristPassword);
+                tourist.TouristPhoneNumber = touristRegisterViewModel.TouristPhoneNumber;
+                tourist.TouristAvatar = touristRegisterViewModel.TouristAvatar;
+                tourist.TouristAddress = touristRegisterViewModel.TouristAddress;
+                db.Tourists.Add(tourist);
+                flag = db.SaveChanges();
+            }
+
+            return flag;
+        }
     }
 }

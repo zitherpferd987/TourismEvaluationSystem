@@ -23,6 +23,7 @@
             @Html.EditorFor(m => m.VerificationCode) <img id="verificationcode" title="点击刷新" src="@Url.Action("VerificationCode")" style="cursor:pointer" /> @Html.ValidationMessageFor(m => m.VerificationCode)
         </p>
         <p><input type="submit" id="LoginButton" value="登录" /></p>
+        <p>@Html.ActionLink("注册", "TouristRegister")</p>
     }
 </div>
 <script type="text/javascript">

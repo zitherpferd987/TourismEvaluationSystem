@@ -75,6 +75,88 @@ namespace TourismEvaluationSystem.Areas.Tourist.Controllers
             return View();
         }
 
+        public ActionResult TouristRegister(TouristRegisterViewModel touristRegisterViewModel)
+        {
+
+            if (HttpContext.Request.RequestType.Equals("POST"))
+            {
+                //下面if语句对验证码做后台验证
+                if (TempData["VerificationCode"] == null || TempData["VerificationCode"].ToString() != touristRegisterViewModel.VerificationCode.ToUpper())
+                {
+                    ModelState.AddModelError("Message", "验证码不正确");
+                    return View(touristRegisterViewModel);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    TouristService touristService = new TouristService();
+                    #region 文件上传处理
+                    //接收文件数据
+                    HttpPostedFileBase postFile = touristRegisterViewModel.TouristAvatarFile;
+                    if (postFile == null)
+                        ModelState.AddModelError("Message", "请选择图片后上传！");
+                    else
+                    {
+                        if (postFile.ContentLength > IMGSIZE * 1024)
+                            ModelState.AddModelError("Message", string.Format("图片大小不得超过{0}KB！", IMGSIZE));
+                        else
+                        {
+                            string fileName = Path.GetFileName(postFile.FileName); //获取文件名称
+                            string fileExt = Path.GetExtension(fileName).ToLower();   //获取文件扩展名称
+                            if (!fileExt.Equals(".jpg"))
+                                ModelState.AddModelError("Message", "只接受jpg格式的图片！");
+                            else
+                            {
+                                string imgDir = "/Content/Images/";//保存位置的服务器路径（虚拟路径）
+                                                                   //新文件主名
+                                string newImgName = DateTime.Now.Year + "_" + DateTime.Now.Month + "_"
+                                    + DateTime.Now.Day + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute
+                                    + "_" + DateTime.Now.Second + "_" + DateTime.Now.Millisecond;
+                                string fullDir = imgDir + newImgName + fileExt;//完整的虚拟路径与文件名
+                                //文件保存                 
+                                postFile.SaveAs(Request.MapPath(fullDir));//注意：Request.MapPath()可将虚拟路径转为本机实际物理路径
+                                touristRegisterViewModel.TouristAvatar = newImgName + fileExt;
+                            }
+                        }
+                    }
+                    #endregion
+                    if (touristService.ExistTouristByAccountName(touristRegisterViewModel.TouristAccountName))
+                    {
+                        ModelState.AddModelError("Message", "用户昵称已存在！");
+                    }
+                    else
+                    {
+                        if (!touristRegisterViewModel.TouristPassword.Equals(touristRegisterViewModel.TouristPasswordConfirm))
+                        {
+                            ModelState.AddModelError("Message", "用户俩次密码不一致！");
+                        }
+                        else
+                        {
+                            Regex reg = new Regex(@"^\d{11}$");
+                            if (!reg.IsMatch(touristRegisterViewModel.TouristPhoneNumber))
+                            {
+                                ModelState.AddModelError("Message", "用户手机号码不能出现数字以外的字母！");
+                            }
+                            else
+                            {
+                                touristService.SaveTouristByTouristRegisterViewModel(touristRegisterViewModel);
+                                return RedirectToAction("Index");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Message", "请检查注册信息是否符合规范！");
+
+                }
+                return View(touristRegisterViewModel);
+            }
+
+            return View();
+        }
+
+
         [TouristControllerFilterAttribute(Name = "TouristControllerFilterAttribute")]
         public ActionResult ViewPotReviewByTourist(int vpId)
         {
